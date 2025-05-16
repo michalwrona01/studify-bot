@@ -7,13 +7,17 @@ from selenium.webdriver.common.by import By
 
 
 class WebBot:
-    def __init__(self, options: List[str] = (), experimental_options: Optional[dict] = ()):
+    def __init__(
+        self, options: List[str] = (), experimental_options: Optional[dict] = ()
+    ):
         service = Service()
         self.options = webdriver.ChromeOptions()
         for option in options:
             self.options.add_argument(option)
         if experimental_options:
-            self.options.add_experimental_option(name="prefs", value=experimental_options)
+            self.options.add_experimental_option(
+                name="prefs", value=experimental_options
+            )
         self.browser = webdriver.Chrome(service=service, options=self.options)
 
     def open_page(self, url: str, time_sleep_sec: int = 0):
