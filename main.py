@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Sent file to API.")
     file.seek(0)
     files = {"file": file}
-    requests.post("http://127.0.0.1:8000/schedule", files=files)
+    requests.post("http://fastapi_app:8000/schedule", files=files)
     file.seek(0)
     file.close()
 
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     ).parse()
     parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
 
-    requests.post("http://127.0.0.1:8000/schedules", data=parsed_json)
+    requests.post("http://backend:8081/schedules", data=parsed_json)
 
     print(parsed_json)
 
