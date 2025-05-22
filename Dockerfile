@@ -17,5 +17,5 @@ WORKDIR /app
 COPY . /app
 
 # install selenium
-RUN pip install -r requirements.txt
+RUN pip install -r req.txt
 
