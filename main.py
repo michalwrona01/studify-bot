@@ -72,26 +72,26 @@ if __name__ == "__main__":
 
     bot.close_page()
 
-    file = open(
-        f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
-        "rb",
-    )
-    file_binary_content = file.read()
-    md5_file = hashlib.md5(file_binary_content).hexdigest()
-    print(f"MD5: {md5_file}")
-    print("Sent file to API.")
-    file.seek(0)
-    files = {"file": file}
-    requests.post("http://fastapi_app:8000/schedule", files=files)
-    file.seek(0)
-    file.close()
+    # file = open(
+    #     f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
+    #     "rb",
+    # )
+    # file_binary_content = file.read()
+    # md5_file = hashlib.md5(file_binary_content).hexdigest()
+    # print(f"MD5: {md5_file}")
+    # print("Sent file to API.")
+    # file.seek(0)
+    # files = {"file": file}
+    # requests.post("http://fastapi_app:8000/schedule", files=files)
+    # file.seek(0)
+    # file.close()
 
     parsed_dict_file = ScheduleParser(
         schedule_file_name=settings.FILE_NAME_PATH
     ).parse()
     parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
 
-    requests.post("http://backend:8081/schedules", data=parsed_json)
+    requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/schedules", data=parsed_json)
 
     print(parsed_json)
 

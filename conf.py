@@ -13,6 +13,8 @@ class Settings:
         self.THRESHOLD_TIME_MIN = int(os.getenv("THRESHOLD_TIME", 5)) * 60
         self.FILE_NAME = os.getenv("FILE_NAME")
         self.FILE_NAME_PATH = os.getenv("FILE_NAME_PATH")
+        self.BACKEND_HOST = os.getenv("BACKEND_HOST")
+        self.BACKEND_PORT = os.getenv("BACKEND_PORT")
 
 
 settings = Settings()
