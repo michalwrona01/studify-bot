@@ -10,11 +10,9 @@ services:
     env_file:
       - ../environment/prod/bot/bot.env
     networks:
-      - bot_network
-      - studify
+      - mikrus-net
+
 networks:
-  bot_network:
-    external: true
-  studify:
+  mikrus-net:
     external: true
 

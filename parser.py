@@ -32,10 +32,13 @@ class ScheduleParser:
         )
 
     def parse(self) -> List[Dict]:
-        converted = self._convert_to_dict()
-        normalized = self._normalize(converted)
-
-        self._clean_up()
+        try:
+            converted = self._convert_to_dict()
+            normalized = self._normalize(converted)
+        except Exception as exc:
+            raise exc from exc
+        finally:
+            self._clean_up()
         return normalized
 
     def _convert_to_dict(self):
@@ -43,10 +46,10 @@ class ScheduleParser:
         x2x.to_xlsx(self.schedule_file_path_xlsx)
 
         xlsx2html(
-            self.schedule_file_path_xlsx, output=self.schedule_file_path_html, sheet=1
+            self.schedule_file_path_xlsx, output=self.schedule_file_path_html, sheet=0
         )
 
-        df = pd.read_html(self.schedule_file_path_html, header=4)
+        df = pd.read_html(self.schedule_file_path_html, header=3)
         df = df[0]
 
         unnamed_columns = [
@@ -55,6 +58,8 @@ class ScheduleParser:
         df = df.drop(columns=unnamed_columns)
 
         df = df.fillna("")
+
+        df = df[df["SEKCJA"] != ""]
 
         df["DATA"] = pd.to_datetime(df["DATA"], format="%m/%d/%Y").dt.date
 
