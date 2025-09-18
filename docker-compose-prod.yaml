@@ -2,7 +2,7 @@ services:
   bot:
     build: ../bot
     volumes:
-      - .:/app
+      - ..:/app
     container_name: bot
     command: bash -c "while true; do python main.py; sleep 300; done"
     env_file:
