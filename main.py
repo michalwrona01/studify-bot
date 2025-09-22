@@ -91,6 +91,8 @@ if __name__ == "__main__":
     ).parse()
     parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
 
+    print(parsed_json)
+
     requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/schedules", data=parsed_json)
 
     print(parsed_json)
