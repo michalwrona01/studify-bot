@@ -48,9 +48,13 @@ if __name__ == "__main__":
 
     print("Logged.")
 
-    bot.click_button(
-        by=By.ID, value="idSIButton9", time_sleep_sec=4
-    )  # Redirect to nDziekenat
+    bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
+
+    bot.click_button(By.CSS_SELECTOR, 'div[aria-label*="Sign in with"]', time_sleep_sec=2)
+
+    # bot.click_button(
+    #     by=By.ID, value="idSIButton9", time_sleep_sec=4
+    # )  # Redirect to nDziekenat
 
     bot.click_button(
         by=By.CLASS_NAME, value="btn-primary", time_sleep_sec=6
