@@ -2,6 +2,7 @@ from pathlib import Path
 
 import os
 
+
 if bool(int(os.getenv("USE_VALUT"))):
     from vault.vault_settings import *
 
