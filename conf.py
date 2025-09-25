@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from vault.vault_settings import *
+if bool(int(os.getenv("USE_VALUT"))):
+    from vault.vault_settings import *
 
 BASE_DIR = Path(__file__).resolve().parent
 
