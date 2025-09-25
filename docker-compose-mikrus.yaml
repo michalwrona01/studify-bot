@@ -1,0 +1,16 @@
+services:
+  studify-bot:
+    build: .
+    volumes:
+      - .:/app
+    container_name: studify-bot
+    command: bash -c "while true; do python main.py; sleep 300; done"
+    env_file:
+      - ../environment/prod/bot/bot.env
+    networks:
+      - mikrus-net
+
+networks:
+  mikrus-net:
+    external: true
+
