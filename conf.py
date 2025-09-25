@@ -3,7 +3,7 @@ from pathlib import Path
 import os
 
 
-if bool(int(os.getenv("USE_VALUT"))):
+if bool(int(os.getenv("USE_VAULT"))):
     from vault.vault_settings import *
 
 BASE_DIR = Path(__file__).resolve().parent
