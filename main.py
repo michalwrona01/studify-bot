@@ -7,6 +7,16 @@ import requests
 from base import WebBot
 from conf import settings
 from selenium.webdriver.common.by import By
+import logging
+
+
+logger = logging.getLogger("studify-bot")
+logger.setLevel(logging.INFO)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s - %(message)s")
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
 
 if __name__ == "__main__":
     options = {
@@ -25,7 +35,7 @@ if __name__ == "__main__":
         experimental_options=options,
     )
 
-    print(f"Start bot at {datetime.now()} \n")
+    logger.info(f"Start bot at {datetime.now()} \n")
 
     bot.open_page(
         url="https://auth-dziekanat.wst.com.pl/Account/Login?ReturnUrl=%2F",
@@ -46,7 +56,7 @@ if __name__ == "__main__":
         by=By.ID, value="idSIButton9", time_sleep_sec=3
     )  # Redirect to YES or NO modal
 
-    print("Logged.")
+    logger.info("Logged.")
 
     bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
 
@@ -72,7 +82,7 @@ if __name__ == "__main__":
         value=f'//button[contains(text(), "{settings.FILE_NAME}")]',
         time_sleep_sec=5,
     )
-    print("Saved file.")
+    logger.info("Saved file.")
 
     bot.close_page()
 
@@ -82,8 +92,8 @@ if __name__ == "__main__":
     # )
     # file_binary_content = file.read()
     # md5_file = hashlib.md5(file_binary_content).hexdigest()
-    # print(f"MD5: {md5_file}")
-    # print("Sent file to API.")
+    # logger.info(f"MD5: {md5_file}")
+    # logger.info("Sent file to API.")
     # file.seek(0)
     # files = {"file": file}
     # requests.post("http://fastapi_app:8000/schedule", files=files)
@@ -95,6 +105,6 @@ if __name__ == "__main__":
     ).parse()
     parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
 
-    requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/schedules", data=parsed_json)
+    requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules", data=parsed_json)
 
-    print(f"Finish bot at {datetime.now()} \n")
+    logger.info(f"Finish bot at {datetime.now()} \n")
