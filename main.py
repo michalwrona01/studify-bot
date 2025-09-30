@@ -26,12 +26,12 @@ if __name__ == "__main__":
         "safebrowsing.enabled": True,
     }
     bot = WebBot(
-        # options=[
-        #     "--headless",
-        #     "--no-sandbox",
-        #     "--disable-dev-shm-usage",
-        #     "--disable-gpu",
-        # ],
+        options=[
+            "--headless",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+        ],
         experimental_options=options,
     )
 
