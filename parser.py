@@ -6,6 +6,7 @@ from typing import Dict, List
 
 import pandas as pd
 from bs4 import BeautifulSoup
+from xls2xlsx import XLS2XLSX
 
 from conf import settings
 import subprocess
