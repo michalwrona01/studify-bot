@@ -26,12 +26,12 @@ if __name__ == "__main__":
         "safebrowsing.enabled": True,
     }
     bot = WebBot(
-        options=[
-            "--headless",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-        ],
+        # options=[
+        #     "--headless",
+        #     "--no-sandbox",
+        #     "--disable-dev-shm-usage",
+        #     "--disable-gpu",
+        # ],
         experimental_options=options,
     )
 
@@ -90,21 +90,11 @@ if __name__ == "__main__":
     #     f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
     #     "rb",
     # )
-    # file_binary_content = file.read()
-    # md5_file = hashlib.md5(file_binary_content).hexdigest()
-    # logger.info(f"MD5: {md5_file}")
-    # logger.info("Sent file to API.")
-    # file.seek(0)
-    # files = {"file": file}
-    # requests.post("http://fastapi_app:8000/schedule", files=files)
-    # file.seek(0)
-    # file.close()
-
-    parsed_dict_file = ScheduleParser(
-        schedule_file_name=settings.FILE_NAME_PATH
-    ).parse()
+    parsed_dict_file = ScheduleParser(schedule_file_name=settings.FILE_NAME_PATH).parse()
     parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
 
     requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules", data=parsed_json)
+
+    logger.info("Sent file to API.")
 
     logger.info(f"Finish bot at {datetime.now()} \n")

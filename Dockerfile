@@ -10,6 +10,9 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositorie
 RUN apk update
 RUN apk add chromium chromium-chromedriver
 
+# install libraoffice
+RUN apk add libreoffice
+
 # upgrade pip
 RUN pip install --upgrade pip
 
