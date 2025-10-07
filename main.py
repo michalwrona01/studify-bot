@@ -1,22 +1,13 @@
-import hashlib
 import json
 from datetime import datetime
 from parser import ScheduleParser
 
 import requests
+from selenium.webdriver.common.by import By
+
 from base import WebBot
 from conf import settings
-from selenium.webdriver.common.by import By
-import logging
-
-
-logger = logging.getLogger("studify-bot")
-logger.setLevel(logging.INFO)
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(name)s - %(message)s")
-console_handler.setFormatter(formatter)
-logger.addHandler(console_handler)
+from logger import logger
 
 if __name__ == "__main__":
     options = {
@@ -26,12 +17,12 @@ if __name__ == "__main__":
         "safebrowsing.enabled": True,
     }
     bot = WebBot(
-        options=[
-            "--headless",
-            "--no-sandbox",
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-        ],
+        # options=[
+        #     "--headless",
+        #     "--no-sandbox",
+        #     "--disable-dev-shm-usage",
+        #     "--disable-gpu",
+        # ],
         experimental_options=options,
     )
 
@@ -42,37 +33,32 @@ if __name__ == "__main__":
         time_sleep_sec=2,
     )
 
-    bot.click_button(
-        by=By.CLASS_NAME, value="social-media", time_sleep_sec=2
-    )  # Redirect to login page
+    bot.click_button(by=By.CLASS_NAME, value="social-media", time_sleep_sec=2)  # Redirect to login page
 
     bot.add_input(by=By.ID, value="i0116", text=settings.EMAIL_ADDRESS)  # Enter e-mail
-    bot.click_button(
-        by=By.ID, value="idSIButton9", time_sleep_sec=2
-    )  # Click and redirect to enter password
+    bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=2)  # Click and redirect to enter password
 
     bot.add_input(by=By.ID, value="i0118", text=settings.PASSWORD)  # Enter password
-    bot.click_button(
-        by=By.ID, value="idSIButton9", time_sleep_sec=3
-    )  # Redirect to YES or NO modal
+    bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)  # Redirect to YES or NO modal
 
     logger.info("Logged.")
 
-    bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
+    if bot.find_element(by=By.ID, value="cancelLink", time_sleep_sec=1):
+        bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
 
-    bot.click_button(By.CSS_SELECTOR, 'div[aria-label*="Sign in with"]', time_sleep_sec=2)
+    if bot.find_element(by=By.ID, value="idSIButton9", time_sleep_sec=1):
+        bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)
+
+    if bot.find_element(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=1):
+        bot.click_button(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=2)
 
     # bot.click_button(
     #     by=By.ID, value="idSIButton9", time_sleep_sec=4
     # )  # Redirect to nDziekenat
 
-    bot.click_button(
-        by=By.CLASS_NAME, value="btn-primary", time_sleep_sec=6
-    )  # Click "Return to nDziekanat"
+    bot.click_button(by=By.CLASS_NAME, value="btn-primary", time_sleep_sec=6)  # Click "Return to nDziekanat"
 
-    bot.open_page(
-        url="https://dziekanat.wst.com.pl/pl/repozytorium-plikow", time_sleep_sec=5
-    )  # Open page
+    bot.open_page(url="https://dziekanat.wst.com.pl/pl/repozytorium-plikow", time_sleep_sec=5)  # Open page
 
     bot.add_input(by=By.ID, value="nazwa-input", text=f"{settings.FILE_NAME.lower()}")
     bot.click_button(by=By.XPATH, value='//button[text()="Szukaj"]', time_sleep_sec=1)
@@ -86,14 +72,33 @@ if __name__ == "__main__":
 
     bot.close_page()
 
-    # file = open(
-    #     f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
-    #     "rb",
-    # )
-    parsed_dict_file = ScheduleParser(schedule_file_name=settings.FILE_NAME_PATH).parse()
-    parsed_json = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
+    file = open(
+        f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
+        "rb",
+    )
 
-    requests.post(f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules", data=parsed_json)
+    parsed_dict_file = ScheduleParser(schedule_file_name=settings.FILE_NAME_PATH).parse()
+
+    data = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
+
+    files = {
+        "file": file,
+    }
+
+    response = requests.post(
+        f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules/files",
+        files=files,
+    )
+
+    logger.info(f"Response: {response.json()}")
+
+    if response.json()["is_email_sent"]:
+        response = requests.post(
+            f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules",
+            data=data,
+        )
+
+    print(response.status_code, response.text)
 
     logger.info("Sent file to API.")
 

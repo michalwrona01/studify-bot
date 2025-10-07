@@ -1,7 +1,5 @@
-from pathlib import Path
-
 import os
-
+from pathlib import Path
 
 if bool(int(os.getenv("USE_VAULT", "0"))):
     from vault.vault_settings import *

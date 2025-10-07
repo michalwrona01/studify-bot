@@ -2,6 +2,7 @@ import time
 from typing import List, Optional
 
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
@@ -27,6 +28,16 @@ class WebBot:
         field = self.browser.find_element(by=by, value=value)
         field.send_keys(text)
         time.sleep(time_sleep_sec)
+
+    def find_element(self, by: By, value: str, time_sleep_sec: int = 0):
+        try:
+            self.browser.find_element(by=by, value=value)
+            is_find = True
+        except NoSuchElementException as exc:
+            is_find = False
+
+        time.sleep(time_sleep_sec)
+        return is_find
 
     def click_button(self, by: By, value: str, time_sleep_sec: int = 0):
         button = self.browser.find_element(by=by, value=value)
