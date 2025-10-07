@@ -98,8 +98,6 @@ if __name__ == "__main__":
             data=data,
         )
 
-    print(response.status_code, response.text)
-
-    logger.info("Sent file to API.")
+    logger.info(f"Sent file to API. Status: {response.status_code}")
 
     logger.info(f"Finish bot at {datetime.now()} \n")
