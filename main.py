@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     logger.info(f"Response: {response.json()}")
 
-    if response.json()["is_email_sent"]:
+    if response.json()["is_email_sent"] or settings.ALWAYS_UPDATE_SCHEDULES:
         response = requests.post(
             f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules",
             data=data,

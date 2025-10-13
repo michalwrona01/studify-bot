@@ -17,6 +17,7 @@ class Settings:
         self.FILE_NAME_PATH = os.getenv("FILE_NAME_PATH")
         self.BACKEND_HOST = os.getenv("BACKEND_HOST")
         self.BACKEND_PORT = os.getenv("BACKEND_PORT")
+        self.ALWAYS_UPDATE_SCHEDULES = bool(int(os.getenv("ALWAYS_UPDATE_SCHEDULES", "0")))
 
 
 settings = Settings()
