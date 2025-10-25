@@ -16,6 +16,9 @@ RUN apk add libreoffice
 # upgrade pip
 RUN pip install --upgrade pip
 
+# install selenium
+RUN pip install -r req.txt
+
 WORKDIR /app
 COPY . /app
 
