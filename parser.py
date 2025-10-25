@@ -6,9 +6,9 @@ from pathlib import Path
 from typing import Dict, List
 from uuid import uuid4
 
+import openpyxl
 import pandas as pd
 from bs4 import BeautifulSoup
-from xls2xlsx import XLS2XLSX
 
 from conf import settings
 from logger import logger
@@ -110,6 +110,43 @@ class ScheduleParser:
 
     @staticmethod
     def _convert_xlsx_to_html(*, xls_path: str, out_dir_path: str):
+        wb = openpyxl.load_workbook(xls_path, keep_vba=True, keep_links=True, rich_text=True)
+        for ws in wb.worksheets:
+            logger.info(f"Processing sheet: {ws.title}")
+
+            # --- 1. Usuń główny AutoFiltr arkusza ---
+            if ws.auto_filter.ref:
+                logger.info(f"Removing sheet auto_filter definition.")
+                ws.auto_filter.ref = None
+
+            # --- 2. Usuń filtry z "Tabel" (ListObjects) ---
+            # Filtry mogą być też częścią sformatowanej Tabeli wewnątrz arkusza
+            if ws.tables:
+                for table in ws.tables.values():
+                    if table.autoFilter:
+                        logger.info(f"Removing filter from table: {table.name}")
+                        table.autoFilter = None  # Usuń definicję filtra z tabeli
+
+            # --- 3. Odkryj wszystkie ukryte wiersze (NAJWAŻNIEJSZE) ---
+            # Iterujemy po wszystkich wierszach, które mają zdefiniowane właściwości
+            if ws.row_dimensions:
+                logger.info(f"Unhiding all explicitly hidden rows in: {ws.title}")
+                for row_dim in ws.row_dimensions.values():
+                    if row_dim.hidden:
+                        row_dim.hidden = False
+
+            # Dodatkowe sprawdzenie: Czasem wiersze są ukryte bez
+            # jawnego obiektu 'row_dimension' (używają domyślnych).
+            # Ta pętla upewnia się, że wszystko jest widoczne.
+            for i in range(1, ws.max_row + 1):
+                rd = ws.row_dimensions.get(i)
+                if rd and rd.hidden:
+                    rd.hidden = False
+
+        wb.save(out_dir_path / "test.xlsx")
+        wb.close()
+        logger.info("Filters removed. Starting conversion.")
+
         logger.info(f"Converting {xls_path} to html")
         command = [
             "soffice",
@@ -146,14 +183,22 @@ class ScheduleParser:
             file.write(str(soup))
 
     @staticmethod
-    def _convert_xls_to_xlsx(*, xls_path: str, xlsx_path: str):
-        logger.info(f"Start converting xls to xlsx")
-        x2x = XLS2XLSX(xls_path)
-        x2x.to_xlsx(xlsx_path)
-        logger.info(f"Finish converting xls to xlsx")
+    def _convert_xls_to_xlsx(*, xls_path: str, out_dir_path: str):
+        logger.info(f"Converting {xls_path} to xlsx")
+        command = [
+            "soffice",
+            "--headless",
+            "--convert-to",
+            "xlsx",
+            xls_path,
+            "--outdir",
+            out_dir_path,
+        ]
+        subprocess.run(command, check=True, capture_output=True, text=True, encoding="utf-8")
+        logger.info("Finish converting xls to xlsx")
 
     def _convert_to_dict(self):
-        self._convert_xls_to_xlsx(xls_path=self.schedule_file_path_xls, xlsx_path=self.schedule_file_path_xlsx)
+        self._convert_xls_to_xlsx(xls_path=self.schedule_file_path_xls, out_dir_path=settings.PATH_SAVE_FILES)
         self._convert_xlsx_to_html(xls_path=self.schedule_file_path_xlsx, out_dir_path=settings.PATH_SAVE_FILES)
         self._mark_canceled_classes(html_path=self.schedule_file_path_html)
 
@@ -167,7 +212,7 @@ class ScheduleParser:
 
         df = df[df["SEKCJA"] != ""]
 
-        df["DATA"] = pd.to_datetime(df["DATA"], format="%m/%d/%Y").dt.date
+        df["DATA"] = pd.to_datetime(df["DATA"], format="%d/%m/%Y").dt.date
 
         df["DATA"] = df["DATA"].apply(lambda x: x.isoformat())
 
