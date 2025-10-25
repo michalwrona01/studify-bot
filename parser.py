@@ -143,7 +143,7 @@ class ScheduleParser:
                 if rd and rd.hidden:
                     rd.hidden = False
 
-        wb.save(out_dir_path / "test.xlsx")
+        wb.save(xls_path)
         wb.close()
         logger.info("Filters removed. Starting conversion.")
 

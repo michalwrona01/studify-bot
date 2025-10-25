@@ -19,6 +19,3 @@ RUN pip install --upgrade pip
 WORKDIR /app
 COPY . /app
 
-# install selenium
-RUN pip install -r req.txt
-
