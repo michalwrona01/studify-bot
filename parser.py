@@ -14,9 +14,9 @@ from conf import settings
 from logger import logger
 
 mapped_columns = {
-    "DATA": "date",
-    "Dzień tyg.": "day_of_week",
-    "GRUPA": "group",
+    "DATA / DATE": "date",
+    "DZIEŃ / DAY": "day_of_week",
+    "GRUPA / GROUP": "group",
     "SEKCJA": "section",
     "TRYB": "mode",
 }
@@ -82,7 +82,7 @@ ADDRESSES = {
 
 def uid_gen() -> str:
     uid = str(uuid4())
-    return f"{uid}@as.wronamichal.pl"
+    return f"{uid}@as.wronamichal.online"
 
 
 class ScheduleParser:
