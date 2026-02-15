@@ -212,9 +212,9 @@ class ScheduleParser:
 
         df = df[df["SEKCJA"] != ""]
 
-        df["DATA"] = pd.to_datetime(df["DATA"], format="%m/%d/%Y").dt.date
+        df["DATA / DATE"] = pd.to_datetime(df["DATA / DATE"], format="%m/%d/%Y").dt.date
 
-        df["DATA"] = df["DATA"].apply(lambda x: x.isoformat())
+        df["DATA / DATE"] = df["DATA / DATE"].apply(lambda x: x.isoformat())
 
         return df.to_dict(orient="records")
 
