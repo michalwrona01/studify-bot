@@ -156,7 +156,11 @@ class ScheduleParser:
 
         df = df[df["SEKCJA"] != ""]
 
-        df["DATA / DATE"] = pd.to_datetime(df["DATA / DATE"], format="%d/%m/%Y").dt.date
+        df["DATA / DATE"] = pd.to_datetime(
+            df["DATA / DATE"],
+            format="mixed",
+            dayfirst=False
+        ).dt.date
 
         df["DATA / DATE"] = df["DATA / DATE"].apply(lambda x: x.isoformat())
 
