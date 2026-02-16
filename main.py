@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     parsed_dict_file = ScheduleParser(schedule_file_name=settings.FILE_NAME_PATH).parse()
 
-    data = json.dumps(parsed_dict_file, indent=4, ensure_ascii=False)
+    data = json.dumps(parsed_dict_file, ensure_ascii=False)
 
     files = {
         "file": file,

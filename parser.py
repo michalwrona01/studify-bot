@@ -21,63 +21,7 @@ mapped_columns = {
     "TRYB": "mode",
 }
 
-ADDRESSES = {
-    "Chirurgia - Przewód pokarmowy": {
-        "address": "Zagłębiowskie Centrum Onkologii Szpital Specjalistyczny im. Sz. Starkiewicza w Dąbrowie Górniczej, ul. Szpitalna 13",
-        "lat": 50.32062360179699,
-        "lng": 19.178391961037644,
-    },
-    "Chirurgia onkologiczna": {
-        "address": "Zagłębiowskie Centrum Onkologii Szpital Specjalistyczny im. Sz. Starkiewicza w Dąbrowie Górniczej, ul. Szpitalna 13",
-        "lat": 50.32062360179699,
-        "lng": 19.178391961037644,
-    },
-    "Choroby wewnętrzne - Gastrologia": {
-        "address": "H-T. Centrum Medyczne Tychy, al. Bielska 105",
-        "lat": 50.115089834344694,
-        "lng": 18.982719477121265,
-    },
-    "Choroby wewnętrzne - Nefrologia": {
-        "address": "Wojewódzki Szpital Specjalistyczny nr 5 im. Św. Barbary w Sosnowcu, Plac medyków 1",
-        "lat": 50.30456441269166,
-        "lng": 19.123207362963445,
-    },
-    "Dermatologia i wenerologia": {
-        "address": "Skin Laser Lubelscy, ul. Azaliowa 2, Bielsko-Biała",
-        "lat": 49.79794559103984,
-        "lng": 19.039727292868893,
-    },
-    "Kardiochirurgia": {
-        "address": "Polsko-Amerykańskie Kliniki Serca w Bielsku-Białej, al. Armii Krajowej 101",
-        "lat": 49.790420120276444,
-        "lng": 19.040722061587246,
-    },
-    "Okulistyka": {
-        "address": "Wojewódzki Szpital Specjalistyczny nr 5 im. Św. Barbary w Sosnowcu, Plac medyków 1",
-        "lat": 50.30456397332421,
-        "lng": 19.1232072434493,
-    },
-    "Onkologia": {
-        "address": "Beskidzkie Centrum Onkologii w Bielsku-Białej, ul. Wyspiańskiego 21; Pawilon IV",
-        "lat": 49.82311009704879,
-        "lng": 19.035610117937317,
-    },
-    "Otorynolaryngologia": {
-        "address": "Zagłębiowskie Centrum Onkologii Szpital Specjalistyczny im. Sz. Starkiewicza w Dąbrowie Górniczej, ul. Szpitalna 13",
-        "lat": 50.320620958626364,
-        "lng": 19.17839208199305,
-    },
-    "Pediatria - Hematologia": {
-        "address": "Zespół Szpitali Miejskich w Chorzowie ul. Truchana 7",
-        "lat": 50.29678654719145,
-        "lng": 18.948361459799177,
-    },
-    "Pediatria - Laryngologia": {
-        "address": "Zespół Szpitali Miejskich w Chorzowie ul. Truchana 7",
-        "lat": 50.29678654719145,
-        "lng": 18.948361459799177,
-    },
-}
+ADDRESSES = {}
 
 
 def uid_gen() -> str:
@@ -212,7 +156,7 @@ class ScheduleParser:
 
         df = df[df["SEKCJA"] != ""]
 
-        df["DATA / DATE"] = pd.to_datetime(df["DATA / DATE"], format="%m/%d/%Y").dt.date
+        df["DATA / DATE"] = pd.to_datetime(df["DATA / DATE"], format="%d/%m/%Y").dt.date
 
         df["DATA / DATE"] = df["DATA / DATE"].apply(lambda x: x.isoformat())
 
