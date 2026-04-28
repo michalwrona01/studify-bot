@@ -18,6 +18,7 @@ class Settings:
         self.BACKEND_HOST = os.getenv("BACKEND_HOST")
         self.BACKEND_PORT = os.getenv("BACKEND_PORT")
         self.ALWAYS_UPDATE_SCHEDULES = bool(int(os.getenv("ALWAYS_UPDATE_SCHEDULES", "0")))
+        self.UPTIME_KUMA_TOKEN = os.getenv("UPTIME_KUMA_TOKEN")
 
 
 settings = Settings()
