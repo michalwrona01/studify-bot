@@ -109,7 +109,7 @@ if __name__ == "__main__":
     msg = "OK"
     ping = ""
     token = settings.UPTIME_KUMA_TOKEN
-    host = "srv11.mikr.us:40439"
+    host = "172.18.0.1:40439"
     protocol = "http"
     uri = "/api/push/"
 
