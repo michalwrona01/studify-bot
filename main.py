@@ -124,4 +124,4 @@ if __name__ == "__main__":
 
         raise exception from exception
     finally:
-        requests.get(f"{protocol}://{host}{uri}{token}?status={status}&msg={msg}&ping={ping}", timeout=5)
+        requests.get(f"{protocol}://{host}{uri}{token}?status={status}&msg={msg}&ping={ping}")
