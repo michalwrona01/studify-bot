@@ -14,7 +14,7 @@ from conf import settings
 from logger import logger
 
 mapped_columns = {
-    "DATA: "date",
+    "DATA": "date",
     "DZIEŃ / DAY": "day_of_week",
     "GRUPA / GROUP": "group",
     "SEKCJA": "section",
