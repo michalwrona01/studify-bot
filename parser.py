@@ -14,7 +14,7 @@ from conf import settings
 from logger import logger
 
 mapped_columns = {
-    "DATA / DATE": "date",
+    "DATA: "date",
     "DZIEŃ / DAY": "day_of_week",
     "GRUPA / GROUP": "group",
     "SEKCJA": "section",
@@ -156,13 +156,13 @@ class ScheduleParser:
 
         df = df[df["SEKCJA"] != ""]
 
-        df["DATA / DATE"] = pd.to_datetime(
-            df["DATA / DATE"],
+        df["DATA"] = pd.to_datetime(
+            df["DATA"],
             format="mixed",
             dayfirst=False
         ).dt.date
 
-        df["DATA / DATE"] = df["DATA / DATE"].apply(lambda x: x.isoformat())
+        df["DATA"] = df["DATA"].apply(lambda x: x.isoformat())
 
         return df.to_dict(orient="records")
 
