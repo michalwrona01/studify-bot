@@ -11,52 +11,53 @@ from conf import settings
 from logger import logger
 import requests
 
-def run_bot(web_bot: WebBot):
+def run_bot(web_bot: WebBot | None):
     logger.info(f"Start bot at {datetime.now()} \n")
 
-    web_bot.open_page(
-        url="https://auth-dziekanat.wst.com.pl/Account/Login?ReturnUrl=%2F",
-        time_sleep_sec=2,
-    )
+    if web_bot:
+        web_bot.open_page(
+            url="https://auth-dziekanat.wst.com.pl/Account/Login?ReturnUrl=%2F",
+            time_sleep_sec=2,
+        )
 
-    web_bot.click_button(by=By.CLASS_NAME, value="social-media", time_sleep_sec=2)  # Redirect to login page
+        web_bot.click_button(by=By.CLASS_NAME, value="social-media", time_sleep_sec=2)  # Redirect to login page
 
-    web_bot.add_input(by=By.ID, value="i0116", text=settings.EMAIL_ADDRESS)  # Enter e-mail
-    web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=2)  # Click and redirect to enter password
+        web_bot.add_input(by=By.ID, value="i0116", text=settings.EMAIL_ADDRESS)  # Enter e-mail
+        web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=2)  # Click and redirect to enter password
 
-    web_bot.add_input(by=By.ID, value="i0118", text=settings.PASSWORD)  # Enter password
-    web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)  # Redirect to YES or NO modal
+        web_bot.add_input(by=By.ID, value="i0118", text=settings.PASSWORD)  # Enter password
+        web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)  # Redirect to YES or NO modal
 
-    logger.info("Logged.")
+        logger.info("Logged.")
 
-    if web_bot.find_element(by=By.ID, value="cancelLink", time_sleep_sec=1):
-        web_bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
+        if web_bot.find_element(by=By.ID, value="cancelLink", time_sleep_sec=1):
+            web_bot.click_button(by=By.ID, value="cancelLink", time_sleep_sec=1)
 
-    if web_bot.find_element(by=By.ID, value="idSIButton9", time_sleep_sec=1):
-        web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)
+        if web_bot.find_element(by=By.ID, value="idSIButton9", time_sleep_sec=1):
+            web_bot.click_button(by=By.ID, value="idSIButton9", time_sleep_sec=3)
 
-    if web_bot.find_element(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=1):
-        web_bot.click_button(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=2)
+        if web_bot.find_element(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=1):
+            web_bot.click_button(by=By.CSS_SELECTOR, value='div[aria-label*="Sign in with"]', time_sleep_sec=2)
 
-    # bot.click_button(
-    #     by=By.ID, value="idSIButton9", time_sleep_sec=4
-    # )  # Redirect to nDziekenat
+        # bot.click_button(
+        #     by=By.ID, value="idSIButton9", time_sleep_sec=4
+        # )  # Redirect to nDziekenat
 
-    web_bot.click_button(by=By.CLASS_NAME, value="btn-primary", time_sleep_sec=6)  # Click "Return to nDziekanat"
+        web_bot.click_button(by=By.CLASS_NAME, value="btn-primary", time_sleep_sec=6)  # Click "Return to nDziekanat"
 
-    web_bot.open_page(url="https://dziekanat.wst.com.pl/pl/repozytorium-plikow", time_sleep_sec=5)  # Open page
+        web_bot.open_page(url="https://dziekanat.wst.com.pl/pl/repozytorium-plikow", time_sleep_sec=5)  # Open page
 
-    web_bot.add_input(by=By.ID, value="nazwa-input", text=f"{settings.FILE_NAME.lower()}")
-    web_bot.click_button(by=By.XPATH, value='//button[text()="Szukaj"]', time_sleep_sec=1)
+        web_bot.add_input(by=By.ID, value="nazwa-input", text=f"{settings.FILE_NAME.lower()}")
+        web_bot.click_button(by=By.XPATH, value='//button[text()="Szukaj"]', time_sleep_sec=1)
 
-    web_bot.click_button(
-        by=By.XPATH,
-        value=f'//button[contains(text(), "{settings.FILE_NAME}")]',
-        time_sleep_sec=5,
-    )
-    logger.info("Saved file.")
+        web_bot.click_button(
+            by=By.XPATH,
+            value=f'//button[contains(text(), "{settings.FILE_NAME}")]',
+            time_sleep_sec=5,
+        )
+        logger.info("Saved file.")
 
-    web_bot.close_page()
+        web_bot.close_page()
 
     file = open(
         f"{str(settings.PATH_SAVE_FILES)}/{settings.FILE_NAME_PATH}.xls",
