@@ -67,6 +67,9 @@ def run_bot(web_bot: WebBot):
 
     data = json.dumps(parsed_dict_file, ensure_ascii=False)
 
+    # with open(f"{str(settings.PATH_SAVE_FILES)}/data.json", "w+") as data_file:
+    #     data_file.write(data)
+
     files = {
         "file": file,
     }

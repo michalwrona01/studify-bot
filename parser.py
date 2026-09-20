@@ -15,8 +15,8 @@ from logger import logger
 
 mapped_columns = {
     "DATA": "date",
-    "DZIEŃ / DAY": "day_of_week",
-    "GRUPA / GROUP": "group",
+    "Dzień tyg.": "day_of_week",
+    "GRUPA": "group",
     "SEKCJA": "section",
     "TRYB": "mode",
 }
