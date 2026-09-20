@@ -159,7 +159,7 @@ class ScheduleParser:
         df["DATA"] = pd.to_datetime(
             df["DATA"],
             format="mixed",
-            dayfirst=True
+            dayfirst=False
         ).dt.date
 
         df["DATA"] = df["DATA"].apply(lambda x: x.isoformat())
