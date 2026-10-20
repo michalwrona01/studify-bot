@@ -26,7 +26,7 @@ ADDRESSES = {}
 
 def uid_gen() -> str:
     uid = str(uuid4())
-    return f"{uid}@as.wronamichal.online"
+    return f"{uid}@as.michalwrona.pl"
 
 
 class ScheduleParser:
