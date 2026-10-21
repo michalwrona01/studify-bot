@@ -82,11 +82,16 @@ def run_bot(web_bot: WebBot | None):
 
     logger.info(f"Response: {response.json()}")
 
-    if response.json()["is_email_sent"] or settings.ALWAYS_UPDATE_SCHEDULES:
+    response.raise_for_status()
+
+    # Import parsed data even when the source file or notifications are unchanged.
+    if response.ok:
         response = requests.post(
             f"http://{settings.BACKEND_HOST}:{settings.BACKEND_PORT}/api/schedules",
             data=data,
         )
+
+    response.raise_for_status()
 
     logger.info(f"Sent file to API. Status: {response.status_code}")
 
