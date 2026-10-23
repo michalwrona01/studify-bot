@@ -13,7 +13,6 @@ import requests
 
 def run_bot(web_bot: WebBot | None):
     logger.info(f"Start bot at {datetime.now()} \n")
-    web_bot = False
 
     if web_bot:
         web_bot.open_page(
@@ -134,5 +133,4 @@ if __name__ == "__main__":
 
         raise exception from exception
     finally:
-        pass
-        #requests.get(f"{protocol}://{host}{uri}{token}?status={status}&msg={msg}&ping={ping}")
+        requests.get(f"{protocol}://{host}{uri}{token}?status={status}&msg={msg}&ping={ping}")

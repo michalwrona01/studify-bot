@@ -198,8 +198,8 @@ class ScheduleParser:
         return normalized_data
 
     def _clean_up(self):
-        # if os.path.exists(self.schedule_file_path_xls):
-        #     os.remove(self.schedule_file_path_xls)
+        if os.path.exists(self.schedule_file_path_xls):
+            os.remove(self.schedule_file_path_xls)
 
         if os.path.exists(self.schedule_file_path_xlsx):
             os.remove(self.schedule_file_path_xlsx)
