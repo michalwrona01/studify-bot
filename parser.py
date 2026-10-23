@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 from conf import settings
 from logger import logger
+from locations import resolve_location, load_workbook_locations
 
 mapped_columns = {
     "DATA": "date",
@@ -21,8 +22,6 @@ mapped_columns = {
     "TRYB": "mode",
 }
 
-ADDRESSES = {}
-
 
 def uid_gen() -> str:
     uid = str(uuid4())
@@ -31,6 +30,7 @@ def uid_gen() -> str:
 
 class ScheduleParser:
     def __init__(self, *, schedule_file_name: Path):
+        self.locations = []
         self.schedule_file_name = schedule_file_name
         self.schedule_file_path_xls = str(settings.PATH_SAVE_FILES / f"{self.schedule_file_name}.xls")
         self.schedule_file_path_xlsx = str(settings.PATH_SAVE_FILES / f"{self.schedule_file_name}.xlsx")
@@ -41,7 +41,7 @@ class ScheduleParser:
         try:
             converted = self._convert_to_dict()
             logger.info(f"Converted {self.schedule_file_name}")
-            normalized = self._normalize_hours(converted)
+            normalized = self._normalize_hours(converted, catalog=self.locations)
             logger.info(f"Normalization done")
         except Exception as exc:
             logger.error(f"Failed to convert {self.schedule_file_name}")
@@ -143,6 +143,10 @@ class ScheduleParser:
 
     def _convert_to_dict(self):
         self._convert_xls_to_xlsx(xls_path=self.schedule_file_path_xls, out_dir_path=settings.PATH_SAVE_FILES)
+        self.locations = load_workbook_locations(
+            self.schedule_file_path_xlsx,
+            Path(os.getenv("GEOCODING_CACHE_PATH", str(Path(settings.PATH_SAVE_FILES) / "location_cache.json"))),
+        )
         self._convert_xlsx_to_html(xls_path=self.schedule_file_path_xlsx, out_dir_path=settings.PATH_SAVE_FILES)
         self._mark_canceled_classes(html_path=self.schedule_file_path_html)
 
@@ -167,7 +171,7 @@ class ScheduleParser:
         return df.to_dict(orient="records")
 
     @staticmethod
-    def _normalize_hours(data: List[Dict]):
+    def _normalize_hours(data: List[Dict], catalog=None):
         normalized_data = []
 
         for day in data:
@@ -176,12 +180,7 @@ class ScheduleParser:
             for key in day.keys():
                 if re.match(r"(\d{2}:\d{2})-(\d{2}:\d{2})", str(key)):
                     if day[key]:
-                        for subject, location in ADDRESSES.items():
-                            if subject in day[key] and "ONLINE" not in day[key]:
-                                found_location = location
-                                break
-                        else:
-                            found_location = {}
+                        found_location = resolve_location(day[key], day.get("TRYB", day.get("mode", "")), catalog=catalog)
 
                         normalize_day["hours"][key] = {
                             "name": day[key],
@@ -199,8 +198,8 @@ class ScheduleParser:
         return normalized_data
 
     def _clean_up(self):
-        if os.path.exists(self.schedule_file_path_xls):
-            os.remove(self.schedule_file_path_xls)
+        # if os.path.exists(self.schedule_file_path_xls):
+        #     os.remove(self.schedule_file_path_xls)
 
         if os.path.exists(self.schedule_file_path_xlsx):
             os.remove(self.schedule_file_path_xlsx)

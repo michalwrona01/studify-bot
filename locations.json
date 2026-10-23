@@ -1,0 +1,269 @@
+{
+  "source_workbook": "Lekarski semestr 9 zima 2026_2027 (3).xls",
+  "source_sheet": "ADRESY",
+  "coordinate_attribution": "© OpenStreetMap contributors, ODbL: https://www.openstreetmap.org/copyright",
+  "locations": [
+    {
+      "subjects": [
+        "Chirurgia dziecięca"
+      ],
+      "facilities": [
+        "Szpital Wielospecjalistyczny w Jaworznie"
+      ],
+      "address": "Szpital Wielospecjalistyczny w Jaworznie ul. Chełmońskiego 28",
+      "lat": 50.2053214,
+      "lng": 19.2840969,
+      "sheet_row": 2,
+      "coordinate_source": "https://www.openstreetmap.org/way/208303837"
+    },
+    {
+      "subjects": [
+        "Chirurgia dziecięca"
+      ],
+      "facilities": [
+        "Zespół Szpitali Miejskich w Chorzowie"
+      ],
+      "address": "Zespół Szpitali Miejskich w Chorzowie ul. Truchana 7",
+      "lat": 50.2966333,
+      "lng": 18.9485042,
+      "sheet_row": 3,
+      "coordinate_source": "https://www.openstreetmap.org/way/179375434"
+    },
+    {
+      "subjects": [
+        "Chirurgia plastyczna"
+      ],
+      "facilities": [
+        "Szpital Chirurgii Małoinwazyjnej i Rekonstrukcyjnej w Bielsku-Białej"
+      ],
+      "address": "Szpital Chirurgii Małoinwazyjnej i Rekonstrukcyjnej w Bielsku-Białej, Al. Armii Krajowej 180",
+      "lat": 49.7857952,
+      "lng": 19.0300387,
+      "sheet_row": 4,
+      "coordinate_source": "https://www.openstreetmap.org/way/549313706"
+    },
+    {
+      "subjects": [
+        "Choroby wewnętrzne - Diabetologia i choroby metaboliczne"
+      ],
+      "facilities": [
+        "Centrum Pulmonologii i Torakochirurgii w Bystrej"
+      ],
+      "address": "Centrum Pulmunologii i Tarakochirurgii w Bystrej, ul. Fałata 2",
+      "lat": 49.7641837,
+      "lng": 19.0711686,
+      "sheet_row": 5,
+      "coordinate_source": "https://www.openstreetmap.org/node/2784533332"
+    },
+    {
+      "subjects": [
+        "Chirurgia naczyniowa - zagadnienia zaawansowane"
+      ],
+      "facilities": [
+        "Małopolskie Centrum Sercowo-Naczyniowe PAKS w Chrzanowie"
+      ],
+      "address": "Małopolskie Centrum Sercowo-Naczyniowe PAKS w Chrzanowie, ul. Topolowa 16",
+      "lat": 50.1370853,
+      "lng": 19.4301822,
+      "sheet_row": 6,
+      "coordinate_source": "https://www.openstreetmap.org/node/4060368123"
+    },
+    {
+      "subjects": [
+        "Chirurgia naczyniowa - zagadnienia zaawansowane"
+      ],
+      "facilities": [
+        "Szpital Zakonu Bonifratrów św. Jana Grandego w Krakowie"
+      ],
+      "address": "Szpital Zakonu Bonifratrów św. Jana Grandego w Krakowie ul. Trynitarska 11",
+      "lat": 50.0474925,
+      "lng": 19.945129,
+      "sheet_row": 7,
+      "coordinate_source": "https://www.openstreetmap.org/way/152137651"
+    },
+    {
+      "subjects": [
+        "Echokardiografia kliniczna",
+        "Podstawy echokardiografii"
+      ],
+      "facilities": [
+        "Polsko-Amerykańskie Kliniki Serca w Bielsku-Białej",
+        "PAKS Bielsko-Biała"
+      ],
+      "address": "Polsko-Amerykańskie Kliniki Serca w Bielsku-Białej, al. Armii Krajowej 101",
+      "lat": 49.7924618,
+      "lng": 19.0397262,
+      "sheet_row": 8,
+      "coordinate_source": "https://www.openstreetmap.org/relation/1535307"
+    },
+    {
+      "subjects": [
+        "Ginekologia i położnictwo"
+      ],
+      "facilities": [
+        "Piekarskie Centrum Medyczne"
+      ],
+      "address": "Piekarskie Centrum Medyczne, ul. Szpitalna 11",
+      "lat": 50.37464,
+      "lng": 18.9525873,
+      "sheet_row": 9,
+      "coordinate_source": "https://www.openstreetmap.org/way/754563370"
+    },
+    {
+      "subjects": [
+        "Ginekologia i położnictwo"
+      ],
+      "facilities": [
+        "Centrum Zdrowia w Mikołowie"
+      ],
+      "address": "Centrum Zdrowia w Mikołowie, ul. Waryńskiego 2",
+      "lat": 50.1743009,
+      "lng": 18.9054838,
+      "sheet_row": 10,
+      "coordinate_source": "https://www.openstreetmap.org/way/582909184"
+    },
+    {
+      "subjects": [
+        "Medycyna rodzinna"
+      ],
+      "facilities": [
+        "Centrum Medyczne Almed w Myszkowie"
+      ],
+      "address": "Centrum Medyczne Almed w Myszkowie, ul. Strażacka 48",
+      "lat": 50.5777258,
+      "lng": 19.3281251,
+      "sheet_row": 11,
+      "coordinate_source": "https://www.openstreetmap.org/way/301448306"
+    },
+    {
+      "subjects": [
+        "Medycyna rodzinna"
+      ],
+      "facilities": [
+        "Zespół Lecznictwa Otwartego Podłęże w Jaworznie"
+      ],
+      "address": "Zespół Lecznictwa Otwartego Podłęże w Jaworznie, al. Piłsudskiego 80",
+      "lat": 50.2153649,
+      "lng": 19.2511059,
+      "sheet_row": 12,
+      "coordinate_source": "https://www.openstreetmap.org/way/1324737226"
+    },
+    {
+      "subjects": [
+        "Medycyna rodzinna"
+      ],
+      "facilities": [
+        "Centrum Medyczne EPIONE w Katowicach"
+      ],
+      "address": "Centrum Medyczne EPIONE w Katowicach, ul. Piotrowicka 68",
+      "lat": 50.2275301,
+      "lng": 18.9703611,
+      "sheet_row": 13,
+      "coordinate_source": "https://www.openstreetmap.org/node/3622093507"
+    },
+    {
+      "subjects": [
+        "Neurochirurgia"
+      ],
+      "facilities": [
+        "5 Wojskowy Szpital Kliniczny z Polikliniką SPZOZ w Krakowie"
+      ],
+      "address": "5 Wojskowy Szpital Kliniczny z Polikliniką SPZOZ w Krakowie, ul. Wrocławska 1-3",
+      "lat": 50.0773814,
+      "lng": 19.93399,
+      "sheet_row": 14,
+      "coordinate_source": "https://www.openstreetmap.org/way/234723781"
+    },
+    {
+      "subjects": [
+        "Neurologia"
+      ],
+      "facilities": [
+        "Zespół Szpitali Miejskich w Chorzowie"
+      ],
+      "address": "Zespół Szpitali Miejskich w Chorzowie ul. Strzelców Bytomskich 11",
+      "lat": 50.2919398,
+      "lng": 18.942806,
+      "sheet_row": 15,
+      "coordinate_source": "https://www.openstreetmap.org/way/179375445"
+    },
+    {
+      "subjects": [
+        "Neurologia"
+      ],
+      "facilities": [
+        "Wojewódzki Szpital Specjalistyczny nr 3 w Rybniku"
+      ],
+      "address": "Wojewódzki Szpital Specjalistyczny nr 3 w Rybniku, ul. Energetyków 46",
+      "lat": 50.1111576,
+      "lng": 18.520188,
+      "sheet_row": 16,
+      "coordinate_source": "https://www.openstreetmap.org/way/856492492"
+    },
+    {
+      "subjects": [
+        "Ortopedia i traumatologia dziecięca"
+      ],
+      "facilities": [
+        "Zespół Szpitali Miejskich w Chorzowie"
+      ],
+      "address": "Zespół Szpitali Miejskich w Chorzowie ul. Truchana 7",
+      "lat": 50.2966333,
+      "lng": 18.9485042,
+      "sheet_row": 17,
+      "coordinate_source": "https://www.openstreetmap.org/way/179375434"
+    },
+    {
+      "subjects": [
+        "Pediatria - Gastrologia"
+      ],
+      "facilities": [
+        "Zespół Szpitali Miejskich w Chorzowie"
+      ],
+      "address": "Zespół Szpitali Miejskich w Chorzowie ul. Truchana 7",
+      "lat": 50.2966333,
+      "lng": 18.9485042,
+      "sheet_row": 18,
+      "coordinate_source": "https://www.openstreetmap.org/way/179375434"
+    },
+    {
+      "subjects": [
+        "Pediatria - Kardiologia"
+      ],
+      "facilities": [
+        "Śląskie Centrum Rehabilitacji i Prewencji w Ustroniu"
+      ],
+      "address": "Śląskie Centrum Rehabilitacji i Prewencji w Ustroniu, ul. Zdrojowa 6",
+      "lat": 49.7180415,
+      "lng": 18.8285484,
+      "sheet_row": 19,
+      "coordinate_source": "https://www.openstreetmap.org/way/288472836"
+    },
+    {
+      "subjects": [
+        "Propedeutyka stomatologii"
+      ],
+      "facilities": [
+        "Wojewódzki Szpital Specjalistyczny nr 5 w Sosnowcu"
+      ],
+      "address": "Wojewódzki Szpital Specjalistyczny nr 5 im. Św. Barbary w Sosnowcu, Plac medyków 1",
+      "lat": 50.3034129,
+      "lng": 19.123404,
+      "sheet_row": 20,
+      "coordinate_source": "https://www.openstreetmap.org/way/771716979"
+    },
+    {
+      "subjects": [
+        "Torakochirurgia"
+      ],
+      "facilities": [
+        "Centrum Pulmonologii i Torakochirurgii w Bystrej"
+      ],
+      "address": "Centrum Pulmunologii i Tarakochirurgii w Bystrej, ul. Fałata 2",
+      "lat": 49.7641837,
+      "lng": 19.0711686,
+      "sheet_row": 21,
+      "coordinate_source": "https://www.openstreetmap.org/node/2784533332"
+    }
+  ]
+}
